@@ -23,7 +23,7 @@ class CoinController extends Controller
     public function getAllCryptoCoinsInformation($coinId = '')
     {
         $client = new Client();
-        $requestUrl = self::COINMARKET_URL . "/v1/ticker";
+        $requestUrl = self::COINMARKET_URL . "/v1/ticker/?limit=0";
         if ($coinId) {
             $requestUrl .= "/$coinId";
         }
