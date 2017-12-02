@@ -6,4 +6,12 @@
 @import "variables";
 
 // Bulma
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+$navbar-item-color: white;
+$table-head-cell-border-width: 0 0 0.3rem;
+$table-head-cell-color: mediumblue;
+$table-cell-padding: 0.5em 3.3em;
+
 @import "~bulma/bulma";

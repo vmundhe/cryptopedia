@@ -5009,7 +5009,7 @@ a.box:active {
 .table th {
   border: 1px solid #dbdbdb;
   border-width: 0 0 1px;
-  padding: 0.5em 0.75em;
+  padding: 0.5em 3.3em;
   vertical-align: top;
 }
 
@@ -5125,8 +5125,8 @@ a.box:active {
 
 .table thead td,
 .table thead th {
-  border-width: 0 0 2px;
-  color: #363636;
+  border-width: 0 0 0.3rem;
+  color: mediumblue;
 }
 
 .table tfoot td,
@@ -7421,7 +7421,7 @@ html.has-navbar-fixed-bottom {
 
 .navbar-item,
 .navbar-link {
-  color: #4a4a4a;
+  color: white;
   display: block;
   line-height: 1.5;
   padding: 0.5rem 1rem;

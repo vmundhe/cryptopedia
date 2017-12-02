@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-black" role="navigation" aria-label="main navigation">
             <h1 class="navbar-item">
                 Cryptopedia
             </h1>

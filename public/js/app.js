@@ -40489,7 +40489,7 @@ var staticRenderFns = [
     return _c(
       "nav",
       {
-        staticClass: "navbar is-light",
+        staticClass: "navbar is-black",
         attrs: { role: "navigation", "aria-label": "main navigation" }
       },
       [
