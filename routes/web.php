@@ -11,4 +11,6 @@
 |
 */
 
-Route::get('/', 'CoinController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
