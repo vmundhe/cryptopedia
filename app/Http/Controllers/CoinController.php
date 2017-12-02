@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use Kevinrob\GuzzleCache\CacheMiddleware;
+use Illuminate\Support\Facades\Cache;
+use Kevinrob\GuzzleCache\Strategy\PrivateCacheStrategy;
+use Kevinrob\GuzzleCache\Storage\LaravelCacheStorage;
 
 class CoinController extends Controller
 {
@@ -22,7 +27,7 @@ class CoinController extends Controller
 
     public function getAllCryptoCoinsInformation($coinId = '')
     {
-        $client = new Client();
+        $client = $this->getGuzzleCachedClient();
         $requestUrl = self::COINMARKET_URL . "/v1/ticker/?limit=0";
         if ($coinId) {
             $requestUrl .= "/$coinId";
@@ -36,5 +41,23 @@ class CoinController extends Controller
         }
 
         return $response;
+    }
+
+    public function getGuzzleCachedClient()
+    {
+        $stack = HandlerStack::create();
+
+        $stack->push(
+            new CacheMiddleware(
+                new PrivateCacheStrategy(
+                    new LaravelCacheStorage(
+                        Cache::store('redis')
+                    )
+                )
+            ),
+            'cache'
+        );
+
+        return new Client(['handler' => $stack]);
     }
 }
