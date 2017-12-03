@@ -43249,7 +43249,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            labels: ['#', 'Name', 'Symbol', 'Price', 'Market Cap', 'Change(24h)'],
+            labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap (USD)', 'Change(24h)'],
             coins: []
         };
     },
@@ -43289,7 +43289,13 @@ var render = function() {
         return _c("tr", [
           _c("td", [_vm._v(_vm._s(coin.rank))]),
           _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(coin.name))]),
+          _c("td", [
+            _c("img", {
+              staticClass: "coin-img",
+              attrs: { src: coin.logo, width: "25px", height: "25px" }
+            }),
+            _vm._v(" " + _vm._s(coin.name))
+          ]),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(coin.symbol))]),
           _vm._v(" "),

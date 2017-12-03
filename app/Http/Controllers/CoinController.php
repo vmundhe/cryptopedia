@@ -14,10 +14,19 @@ use Kevinrob\GuzzleCache\Storage\LaravelCacheStorage;
 class CoinController extends Controller
 {
     const COINMARKET_URL = "https://api.coinmarketcap.com";
+    const CRYPTOCOMPARE_URL = "https://www.cryptocompare.com/api/data/coinlist";
 
     public function index()
     {
-        $allCoins = $this->getAllCryptoCoinsInformation();
+        $coinMarketInfo = $this->getAllCryptoCoinsInformation();
+        $cryptocompareInfo = $this->getCryptocompareCoinInfo();
+
+        $allCoins = $coinMarketInfo;
+        foreach ($allCoins as &$data) {
+            if (isset($cryptocompareInfo[$data['symbol']])) {
+                $data['logo'] = "https://www.cryptocompare.com" . $cryptocompareInfo[$data['symbol']]['ImageUrl'];
+            }
+        }
 
         return response()
             ->json([
@@ -27,18 +36,36 @@ class CoinController extends Controller
 
     public function getAllCryptoCoinsInformation($coinId = '')
     {
-        $client = $this->getGuzzleCachedClient();
         $requestUrl = self::COINMARKET_URL . "/v1/ticker/?limit=0";
         if ($coinId) {
             $requestUrl .= "/$coinId";
         }
-        $makeRequest = $client->request('GET', $requestUrl);
 
-        $response = json_decode($makeRequest->getBody(), true);
+        $response = $this->makeAPICall($requestUrl);
 
         if (array_key_exists('error', $response)) {
             throw $this->createNotFoundException('Found error: ' . $response['error']);
         }
+        return $response;
+    }
+
+    public function getCryptocompareCoinInfo()
+    {
+        $response = $this->makeAPICall(self::CRYPTOCOMPARE_URL);
+
+        if ($response['Response'] == 'Error') {
+            throw $this->createNotFoundException('Found error: ' . $response['error']);
+        }
+        return $response['Data'];
+    }
+
+    public function makeAPICall($url = '')
+    {
+        $client = $this->getGuzzleCachedClient();
+        $requestUrl = $url;
+        $makeRequest = $client->request('GET', $requestUrl);
+
+        $response = json_decode($makeRequest->getBody(), true);
 
         return $response;
     }

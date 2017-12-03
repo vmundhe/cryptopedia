@@ -10,7 +10,7 @@
         <tbody>
             <tr v-for="coin in coins">
                 <td>{{coin.rank}}</td>
-                <td>{{coin.name}}</td>
+                <td><img class="coin-img" :src="coin.logo" width="25px" height="25px"> {{coin.name}}</td>
                 <td>{{coin.symbol}}</td>
                 <td>${{coin.price_usd}}</td>
                 <td>{{coin.market_cap_usd}}</td>
@@ -26,7 +26,7 @@
     export default {
         data() {
             return {
-                labels: ['#', 'Name', 'Symbol', 'Price', 'Market Cap', 'Change(24h)'],
+                labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap (USD)', 'Change(24h)'],
                 coins: []
             }
         },
