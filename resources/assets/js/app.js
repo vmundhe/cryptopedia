@@ -8,9 +8,12 @@
 require('./bootstrap');
 
 import Vue from 'vue'
+import Vue2Filters from 'vue2-filters'
 
 import App from './App.vue'
 import router from './router'
+
+Vue.use(Vue2Filters)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

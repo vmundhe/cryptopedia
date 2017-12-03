@@ -2,7 +2,7 @@
     <div class="container">
         <div>
             <input class="coin-search" v-model="search" type="text" placeholder="Search by name...">
-            <span class="tag is-info is-rounded">Market Cap: ${{totalMarketCap}}</span>
+            <span class="tag is-info is-rounded">Market Cap: {{totalMarketCap | currency('$', 0)}}</span>
         </div>
 
         <div class="table is-striped is-fullwidth">
@@ -18,8 +18,8 @@
                     <td>{{coin.rank}}</td>
                     <td><img class="coin-img" :src="coin.logo" width="25px" height="25px"> {{coin.name}}</td>
                     <td>{{coin.symbol}}</td>
-                    <td>${{coin.price_usd}}</td>
-                    <td>${{coin.market_cap_usd}}</td>
+                    <td>{{coin.price_usd | currency}}</td>
+                    <td>{{coin.market_cap_usd | currency('$', 0)}}</td>
                     <td :style="getColor(coin.percent_change_24h)">
                         {{coin.percent_change_24h}}%
                     </td>
