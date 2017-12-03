@@ -1,24 +1,28 @@
 <template>
-    <div class="table is-striped is-fullwidth">
-        <thead>
-            <tr>
-                <td v-for="label in labels">
-                    {{label}}
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="coin in coins">
-                <td>{{coin.rank}}</td>
-                <td><img class="coin-img" :src="coin.logo" width="25px" height="25px"> {{coin.name}}</td>
-                <td>{{coin.symbol}}</td>
-                <td>${{coin.price_usd}}</td>
-                <td>{{coin.market_cap_usd}}</td>
-                <td :style="getColor(coin.percent_change_24h)">
-                    {{coin.percent_change_24h}}%
-                </td>
-            </tr>
-        </tbody>
+    <div>
+        <input v-model="search" type="text" placeholder="Search by name...">
+
+        <div class="table is-striped is-fullwidth">
+            <thead>
+                <tr>
+                    <td v-for="label in labels">
+                        {{label}}
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="coin in filteredCoins">
+                    <td>{{coin.rank}}</td>
+                    <td><img class="coin-img" :src="coin.logo" width="25px" height="25px"> {{coin.name}}</td>
+                    <td>{{coin.symbol}}</td>
+                    <td>${{coin.price_usd}}</td>
+                    <td>${{coin.market_cap_usd}}</td>
+                    <td :style="getColor(coin.percent_change_24h)">
+                        {{coin.percent_change_24h}}%
+                    </td>
+                </tr>
+            </tbody>
+        </div>
     </div>
 </template>
 
@@ -28,6 +32,7 @@
     export default {
         data() {
             return {
+                search: '',
                 labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap', 'Change(24h)'],
                 coins: []
             }
@@ -43,6 +48,18 @@
         methods: {
             getColor: (num) => {
             return num > 0 ? "color:green;" : "color:red;";
+            }
+        },
+
+        computed: {
+            filteredCoins: function () {
+                var self = this;
+                return this.coins
+                    .filter(function(coin)
+                    {
+                        return coin.name.toLowerCase().indexOf(self.search.toLowerCase())>=0;
+                    })
+                    ;
             }
         }
     }

@@ -11805,7 +11805,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(46);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
@@ -43174,7 +43174,7 @@ var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(43)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(44)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43245,12 +43245,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            search: '',
             labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap', 'Change(24h)'],
             coins: []
         };
@@ -43268,60 +43273,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getColor: function getColor(num) {
             return num > 0 ? "color:green;" : "color:red;";
         }
+    },
+
+    computed: {
+        filteredCoins: function filteredCoins() {
+            var self = this;
+            return this.coins.filter(function (coin) {
+                return coin.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+            });
+        }
     }
 });
 
 /***/ }),
-/* 44 */,
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "table is-striped is-fullwidth" }, [
-    _c("thead", [
+  return _c("div", [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.search,
+          expression: "search"
+        }
+      ],
+      attrs: { type: "text", placeholder: "Search by name..." },
+      domProps: { value: _vm.search },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.search = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "table is-striped is-fullwidth" }, [
+      _c("thead", [
+        _c(
+          "tr",
+          _vm._l(_vm.labels, function(label) {
+            return _c("td", [
+              _vm._v(
+                "\n                    " + _vm._s(label) + "\n                "
+              )
+            ])
+          })
+        )
+      ]),
+      _vm._v(" "),
       _c(
-        "tr",
-        _vm._l(_vm.labels, function(label) {
-          return _c("td", [
-            _vm._v("\n                " + _vm._s(label) + "\n            ")
+        "tbody",
+        _vm._l(_vm.filteredCoins, function(coin) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(coin.rank))]),
+            _vm._v(" "),
+            _c("td", [
+              _c("img", {
+                staticClass: "coin-img",
+                attrs: { src: coin.logo, width: "25px", height: "25px" }
+              }),
+              _vm._v(" " + _vm._s(coin.name))
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(coin.symbol))]),
+            _vm._v(" "),
+            _c("td", [_vm._v("$" + _vm._s(coin.price_usd))]),
+            _vm._v(" "),
+            _c("td", [_vm._v("$" + _vm._s(coin.market_cap_usd))]),
+            _vm._v(" "),
+            _c("td", { style: _vm.getColor(coin.percent_change_24h) }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(coin.percent_change_24h) +
+                  "%\n                "
+              )
+            ])
           ])
         })
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "tbody",
-      _vm._l(_vm.coins, function(coin) {
-        return _c("tr", [
-          _c("td", [_vm._v(_vm._s(coin.rank))]),
-          _vm._v(" "),
-          _c("td", [
-            _c("img", {
-              staticClass: "coin-img",
-              attrs: { src: coin.logo, width: "25px", height: "25px" }
-            }),
-            _vm._v(" " + _vm._s(coin.name))
-          ]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(coin.symbol))]),
-          _vm._v(" "),
-          _c("td", [_vm._v("$" + _vm._s(coin.price_usd))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(coin.market_cap_usd))]),
-          _vm._v(" "),
-          _c("td", { style: _vm.getColor(coin.percent_change_24h) }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(coin.percent_change_24h) +
-                "%\n            "
-            )
-          ])
-        ])
-      })
-    )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -43335,7 +43373,7 @@ if (false) {
 }
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
