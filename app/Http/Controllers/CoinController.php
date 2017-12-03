@@ -22,7 +22,9 @@ class CoinController extends Controller
         $cryptocompareInfo = $this->getCryptocompareCoinInfo();
 
         $allCoins = $coinMarketInfo;
+        $totalMarketCap = 0;
         foreach ($allCoins as &$data) {
+            $totalMarketCap += $data['market_cap_usd'];
             if (isset($cryptocompareInfo[$data['symbol']])) {
                 $data['logo'] = self::CRYPTOCOMPARE_URL . $cryptocompareInfo[$data['symbol']]['ImageUrl'];
             }
@@ -30,7 +32,8 @@ class CoinController extends Controller
 
         return response()
             ->json([
-                'coins' => $allCoins
+                'coins' => $allCoins,
+                'total_market_cap' => $totalMarketCap
             ]);
     }
 

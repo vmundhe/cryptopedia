@@ -11460,3 +11460,8 @@ img {
   padding: 0.3rem;
 }
 
+.tag {
+  margin: 0.5rem 0 0 26rem;
+  font-size: 1rem !important;
+}
+
