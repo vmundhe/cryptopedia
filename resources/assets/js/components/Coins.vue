@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <input v-model="search" type="text" placeholder="Search by name...">
+    <div class="container">
+        <input class="coin-search" v-model="search" type="text" placeholder="Search by name...">
 
         <div class="table is-striped is-fullwidth">
             <thead>
