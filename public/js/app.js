@@ -43243,13 +43243,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap (USD)', 'Change(24h)'],
+            labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap', 'Change(24h)'],
             coins: []
         };
     },
@@ -43259,6 +43261,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api').then(function (response) {
             _this.coins = response.data.coins;
         });
+    },
+
+
+    methods: {
+        getColor: function getColor(num) {
+            return num > 0 ? "color:green;" : "color:red;";
+        }
     }
 });
 
@@ -43303,7 +43312,13 @@ var render = function() {
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(coin.market_cap_usd))]),
           _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(coin.percent_change_24h) + "%")])
+          _c("td", { style: _vm.getColor(coin.percent_change_24h) }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(coin.percent_change_24h) +
+                "%\n            "
+            )
+          ])
         ])
       })
     )

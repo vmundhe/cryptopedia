@@ -14,7 +14,9 @@
                 <td>{{coin.symbol}}</td>
                 <td>${{coin.price_usd}}</td>
                 <td>{{coin.market_cap_usd}}</td>
-                <td>{{coin.percent_change_24h}}%</td>
+                <td :style="getColor(coin.percent_change_24h)">
+                    {{coin.percent_change_24h}}%
+                </td>
             </tr>
         </tbody>
     </div>
@@ -26,7 +28,7 @@
     export default {
         data() {
             return {
-                labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap (USD)', 'Change(24h)'],
+                labels: ['#', 'Name', 'Symbol', 'Price (USD)', 'Market Cap', 'Change(24h)'],
                 coins: []
             }
         },
@@ -36,6 +38,12 @@
                 .then(response => {
                     this.coins = response.data.coins
             })
+        },
+
+        methods: {
+            getColor: (num) => {
+            return num > 0 ? "color:green;" : "color:red;";
+            }
         }
     }
 </script>
