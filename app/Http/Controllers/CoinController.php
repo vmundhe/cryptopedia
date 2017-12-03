@@ -14,7 +14,7 @@ use Kevinrob\GuzzleCache\Storage\LaravelCacheStorage;
 class CoinController extends Controller
 {
     const COINMARKET_URL = "https://api.coinmarketcap.com";
-    const CRYPTOCOMPARE_URL = "https://www.cryptocompare.com/api/data/coinlist";
+    const CRYPTOCOMPARE_URL = "https://www.cryptocompare.com";
 
     public function index()
     {
@@ -24,7 +24,7 @@ class CoinController extends Controller
         $allCoins = $coinMarketInfo;
         foreach ($allCoins as &$data) {
             if (isset($cryptocompareInfo[$data['symbol']])) {
-                $data['logo'] = "https://www.cryptocompare.com" . $cryptocompareInfo[$data['symbol']]['ImageUrl'];
+                $data['logo'] = self::CRYPTOCOMPARE_URL . $cryptocompareInfo[$data['symbol']]['ImageUrl'];
             }
         }
 
@@ -51,7 +51,7 @@ class CoinController extends Controller
 
     public function getCryptocompareCoinInfo()
     {
-        $response = $this->makeAPICall(self::CRYPTOCOMPARE_URL);
+        $response = $this->makeAPICall(self::CRYPTOCOMPARE_URL . "/api/data/coinlist");
 
         if ($response['Response'] == 'Error') {
             throw $this->createNotFoundException('Found error: ' . $response['error']);
