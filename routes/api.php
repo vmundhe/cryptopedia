@@ -14,3 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', 'CoinController@index');
+Route::get('/{symbol}/{id}', 'CoinController@getCoinInfo');

@@ -11451,6 +11451,10 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+.coin-list {
+  cursor: pointer;
+}
+
 img {
   vertical-align: middle;
 }
@@ -11463,5 +11467,39 @@ img {
 .tag {
   margin: 0.5rem 0 0 26rem;
   font-size: 1rem !important;
+}
+
+.coin-info-table td {
+  padding: 0.75rem 2rem;
+}
+
+.coin-info {
+  background-color: currentColor;
+}
+
+.sidebar-header {
+  color: white !important;
+}
+
+.sidebar {
+  margin-top: 0.7rem !important;
+}
+
+.coin-info-navbar {
+  background-color: #596dff;
+}
+
+.coin-info-navbar a {
+  text-decoration: none !important;
+  color: white !important;
+  font-family: sans-serif;
+}
+
+.coin-info-navbar a:hover {
+  background-color: #0d09ff;
+}
+
+.coin-info-navbar a:active {
+  color: whitesmoke;
 }
 

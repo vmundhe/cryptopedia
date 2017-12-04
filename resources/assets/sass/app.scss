@@ -16,6 +16,10 @@ $table-cell-padding: 0.5em 3.3em;
 
 @import "~bulma/bulma";
 
+.coin-list {
+  cursor: pointer;
+}
+
 img {
   vertical-align: middle;
 }
@@ -28,4 +32,35 @@ img {
 .tag {
   margin: 0.5rem 0 0 26rem;
   font-size: 1rem !important;
+}
+
+.coin-info-table td {
+  padding: 0.75rem 2rem;
+}
+
+.coin-info {
+  background-color: currentColor;
+}
+
+.sidebar-header {
+  color: white !important;
+}
+
+.sidebar {
+  margin-top: 0.7rem !important;
+}
+
+.coin-info-navbar {
+  background-color: #596dff;
+  a {
+    text-decoration: none !important;
+    color: white !important;
+    font-family: sans-serif;
+  }
+  a:hover {
+    background-color: #0d09ff;
+  }
+  a:active {
+    color: whitesmoke;
+  }
 }

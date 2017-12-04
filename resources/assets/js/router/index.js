@@ -4,13 +4,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Coins from '../components/Coins.vue'
+import CoinIndex from '../components/Coins/Index.vue'
+import CoinInfo from '../components/Coins/CoinDetail.vue'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
     routes: [
-        {path: '/', component: Coins}
+        {path: '/', component: CoinIndex},
+        {path: '/:symbol/:id', component: CoinInfo}
     ]
 })
 

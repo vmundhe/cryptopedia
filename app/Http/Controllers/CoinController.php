@@ -26,6 +26,7 @@ class CoinController extends Controller
         foreach ($allCoins as &$data) {
             $totalMarketCap += $data['market_cap_usd'];
             if (isset($cryptocompareInfo[$data['symbol']])) {
+                $data['coin_id'] = $cryptocompareInfo[$data['symbol']]['Id'];
                 $data['logo'] = self::CRYPTOCOMPARE_URL . $cryptocompareInfo[$data['symbol']]['ImageUrl'];
             }
         }
@@ -60,6 +61,28 @@ class CoinController extends Controller
             throw $this->createNotFoundException('Found error: ' . $response['error']);
         }
         return $response['Data'];
+    }
+
+    public function getCoinInfo($symbol, $id)
+    {
+        $coinExchangesInfo = $this->makeAPICall(self::CRYPTOCOMPARE_URL . "/api/data/coinsnapshot/?fsym=$symbol&tsym=USD");
+        $coinAdditionalInfo = $this->makeAPICall(self::CRYPTOCOMPARE_URL . "/api/data/coinsnapshotfullbyid/?id=$id");
+
+        if ($coinExchangesInfo['Response'] == 'Error') {
+            throw $this->createNotFoundException('Found error: ' . $coinExchangesInfo['error']);
+        }
+
+        $exchanges = $coinExchangesInfo['Data']['Exchanges'];
+        $additionalInfo = $coinAdditionalInfo['Data']['General'];
+
+        $websiteLink = explode('/', $additionalInfo['Website']);
+        $additionalInfo['website'] = $websiteLink[2];
+
+        return response()
+            ->json([
+               'exchanges' => $exchanges,
+                'additional_info' => $additionalInfo
+            ]);
     }
 
     public function makeAPICall($url = '')

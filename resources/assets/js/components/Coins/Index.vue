@@ -5,7 +5,7 @@
             <span class="tag is-info is-rounded">Market Cap: {{totalMarketCap | currency('$', 0)}}</span>
         </div>
 
-        <div class="table is-striped is-fullwidth">
+        <div class="table is-striped is-fullwidth is-hoverable">
             <thead>
                 <tr>
                     <td v-for="label in labels">
@@ -13,8 +13,9 @@
                     </td>
                 </tr>
             </thead>
+
             <tbody>
-                <tr v-for="coin in filteredCoins">
+                <router-link class="coin-list" v-for="coin in filteredCoins" :to="`/${coin.symbol}/${coin.coin_id}`" tag="tr">
                     <td>{{coin.rank}}</td>
                     <td><img class="coin-img" :src="coin.logo" width="25px" height="25px"> {{coin.name}}</td>
                     <td>{{coin.symbol}}</td>
@@ -23,7 +24,7 @@
                     <td :style="getColor(coin.percent_change_24h)">
                         {{coin.percent_change_24h}}%
                     </td>
-                </tr>
+                </router-link>
             </tbody>
         </div>
     </div>
@@ -51,7 +52,7 @@
         },
 
         methods: {
-            getColor: (num) => {
+            getColor(num) {
             return num > 0 ? "color:green;" : "color:red;";
             }
         },
