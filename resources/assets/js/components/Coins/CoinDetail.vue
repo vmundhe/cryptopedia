@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="tabs is-boxed">
-            <ul>
-                <li class="is-active">
+            <ul class="coin-detail-tabs">
+                <li>
                     <a @click="setActiveTabName('info')">Info</a>
                 </li>
                 <li>
@@ -55,6 +55,7 @@
         methods: {
             setActiveTabName(name) {
                 this.activeTabName = name;
+
             },
             displayContents(name) {
                 return this.activeTabName === name;

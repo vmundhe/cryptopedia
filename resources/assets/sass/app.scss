@@ -64,3 +64,14 @@ img {
     color: whitesmoke;
   }
 }
+
+.coin-detail-tabs {
+  margin-top: 1em;
+  li {
+    margin-right: 1rem;
+  }
+  a {
+    color: currentColor !important;
+    background-color: gainsboro !important;
+  }
+}
