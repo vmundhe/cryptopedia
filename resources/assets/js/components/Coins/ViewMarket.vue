@@ -33,18 +33,12 @@
     import axios from 'axios'
 
     export default {
+        props: ["exchanges"],
+
         data() {
             return {
                 labels: ['#', 'Source', 'Volume (24h)', 'Price'],
-                exchanges: []
             }
-        },
-
-        created() {
-            axios.get(`api/${this.$route.params.symbol}/${this.$route.params.id}`)
-                .then(response => {
-                this.exchanges = response.data.exchanges
-            })
         }
     }
 </script>

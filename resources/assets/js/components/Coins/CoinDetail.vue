@@ -12,15 +12,17 @@
         </div>
 
         <div v-if="displayContents('info')">
-            <view-info></view-info>
+            <view-info :coin-info = "coinInfo"></view-info>
         </div>
         <div v-if="displayContents('markets')">
-            <view-market></view-market>
+            <view-market :exchanges = "exchanges"></view-market>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
+    import axios from 'axios'
+
     import ViewInfo from './ViewInfo.vue'
     import ViewMarket from './ViewMarket.vue'
 
@@ -33,7 +35,17 @@
         data() {
             return {
                 activeTabName: null,
+                coinInfo: '',
+                exchanges: []
             };
+        },
+
+        created() {
+            axios.get(`api/${this.$route.params.symbol}/${this.$route.params.id}`)
+                .then(response => {
+                this.coinInfo = response.data.additional_info
+                this.exchanges = response.data.exchanges
+            })
         },
 
         mounted() {

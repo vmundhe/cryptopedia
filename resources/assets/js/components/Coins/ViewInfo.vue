@@ -65,9 +65,10 @@
     import axios from 'axios'
 
     export default {
+        props: ["coinInfo"],
+
         data() {
             return {
-                coinInfo: '',
                 activeTabName: null,
                 cardData: null,
                 tabs: [
@@ -85,13 +86,6 @@
                     }
                 ]
             }
-        },
-
-        created() {
-            axios.get(`api/${this.$route.params.symbol}/${this.$route.params.id}`)
-                .then(response => {
-                this.coinInfo = response.data.additional_info
-            })
         },
 
         mounted() {

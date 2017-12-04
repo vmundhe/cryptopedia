@@ -44204,9 +44204,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ["coinInfo"],
+
     data: function data() {
         return {
-            coinInfo: '',
             activeTabName: null,
             cardData: null,
             tabs: [{
@@ -44220,13 +44221,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 active: false
             }]
         };
-    },
-    created: function created() {
-        var _this = this;
-
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/' + this.$route.params.symbol + '/' + this.$route.params.id).then(function (response) {
-            _this.coinInfo = response.data.additional_info;
-        });
     },
     mounted: function mounted() {
         this.setCardContent('Description');
@@ -44485,18 +44479,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ["exchanges"],
+
     data: function data() {
         return {
-            labels: ['#', 'Source', 'Volume (24h)', 'Price'],
-            exchanges: []
+            labels: ['#', 'Source', 'Volume (24h)', 'Price']
         };
-    },
-    created: function created() {
-        var _this = this;
-
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/' + this.$route.params.symbol + '/' + this.$route.params.id).then(function (response) {
-            _this.exchanges = response.data.exchanges;
-        });
     }
 });
 
@@ -44629,10 +44617,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ViewInfo_vue__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ViewInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ViewInfo_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ViewMarket_vue__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ViewMarket_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ViewMarket_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ViewInfo_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ViewInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ViewInfo_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ViewMarket_vue__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ViewMarket_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ViewMarket_vue__);
 //
 //
 //
@@ -44655,20 +44645,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        ViewInfo: __WEBPACK_IMPORTED_MODULE_0__ViewInfo_vue___default.a,
-        ViewMarket: __WEBPACK_IMPORTED_MODULE_1__ViewMarket_vue___default.a
+        ViewInfo: __WEBPACK_IMPORTED_MODULE_1__ViewInfo_vue___default.a,
+        ViewMarket: __WEBPACK_IMPORTED_MODULE_2__ViewMarket_vue___default.a
     },
 
     data: function data() {
         return {
-            activeTabName: null
+            activeTabName: null,
+            coinInfo: '',
+            exchanges: []
         };
+    },
+    created: function created() {
+        var _this = this;
+
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/' + this.$route.params.symbol + '/' + this.$route.params.id).then(function (response) {
+            _this.coinInfo = response.data.additional_info;
+            _this.exchanges = response.data.exchanges;
+        });
     },
     mounted: function mounted() {
         this.activeTabName = 'info';
@@ -44726,10 +44728,20 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm.displayContents("info") ? _c("div", [_c("view-info")], 1) : _vm._e(),
+    _vm.displayContents("info")
+      ? _c(
+          "div",
+          [_c("view-info", { attrs: { "coin-info": _vm.coinInfo } })],
+          1
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.displayContents("markets")
-      ? _c("div", [_c("view-market")], 1)
+      ? _c(
+          "div",
+          [_c("view-market", { attrs: { exchanges: _vm.exchanges } })],
+          1
+        )
       : _vm._e()
   ])
 }
