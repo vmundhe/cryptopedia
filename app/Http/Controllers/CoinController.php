@@ -91,7 +91,7 @@ class CoinController extends Controller
 
     public function getCoinHistory($symbol, $exchange)
     {
-        $coinHistoryInfo = $this->makeAPICall(self::MIN_API_CRYPTOCOMPARE . "/data/histoday?fsym=" . strtoupper($symbol) . "&tsym=USD&limit=60&aggregate=3&e=" . $exchange);
+        $coinHistoryInfo = $this->makeAPICall(self::MIN_API_CRYPTOCOMPARE . "/data/histoday?fsym=" . strtoupper($symbol) . "&tsym=USD&limit=2000&e=" . $exchange);
         $coinHistory = $coinHistoryInfo['Data'];
 
         foreach ($coinHistory as &$data) {

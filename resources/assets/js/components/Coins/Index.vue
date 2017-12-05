@@ -8,9 +8,9 @@
         <div class="table is-striped is-fullwidth is-hoverable">
             <thead>
                 <tr>
-                    <td v-for="label in labels">
+                    <th v-for="label in labels">
                         {{label}}
-                    </td>
+                    </th>
                 </tr>
             </thead>
 

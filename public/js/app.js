@@ -44018,7 +44018,7 @@ var render = function() {
         _c(
           "tr",
           _vm._l(_vm.labels, function(label) {
-            return _c("td", [
+            return _c("th", [
               _vm._v(
                 "\n                    " + _vm._s(label) + "\n                "
               )
@@ -44621,7 +44621,7 @@ var render = function() {
         _c(
           "tr",
           _vm._l(_vm.labels, function(label) {
-            return _c("td", [
+            return _c("th", [
               _vm._v("\n                " + _vm._s(label) + "\n            ")
             ])
           })
@@ -44791,7 +44791,7 @@ var render = function() {
         _c(
           "tr",
           _vm._l(_vm.labels, function(label) {
-            return _c("td", [
+            return _c("th", [
               _vm._v("\n                " + _vm._s(label) + "\n            ")
             ])
           })
