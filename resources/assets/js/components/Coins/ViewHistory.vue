@@ -10,11 +10,12 @@
             </thead>
 
             <tbody>
-            <tr v-for="(exchange, key) in exchanges">
-                <td>{{key}}</td>
-                <td>{{exchange.MARKET}}</td>
-                <td>{{exchange.VOLUME24HOUR | currency}}</td>
-                <td>{{exchange.PRICE | currency}}</td>
+            <tr v-for="(data) in history">
+                <td>{{data.time}}</td>
+                <td>{{data.open | currency}}</td>
+                <td>{{data.high | currency}}</td>
+                <td>{{data.low | currency}}</td>
+                <td>{{data.close | currency}}</td>
             </tr>
             </tbody>
         </div>
@@ -23,11 +24,11 @@
 
 <script type="text/javascript">
     export default {
-        props: ['exchanges'],
+        props: ['history'],
 
         data() {
             return {
-                labels: ['#', 'Source', 'Volume (24h)', 'Price'],
+                labels: ['Data', 'Open', 'High', 'Low', 'Close']
             }
         }
     }

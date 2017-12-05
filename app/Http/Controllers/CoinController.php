@@ -15,6 +15,7 @@ class CoinController extends Controller
 {
     const COINMARKET_URL = "https://api.coinmarketcap.com";
     const CRYPTOCOMPARE_URL = "https://www.cryptocompare.com";
+    const MIN_API_CRYPTOCOMPARE = "https://min-api.cryptocompare.com";
 
     public function index()
     {
@@ -66,23 +67,38 @@ class CoinController extends Controller
     public function getCoinInfo($symbol, $id)
     {
         $coinExchangesInfo = $this->makeAPICall(self::CRYPTOCOMPARE_URL . "/api/data/coinsnapshot/?fsym=$symbol&tsym=USD");
+        $exchanges = $coinExchangesInfo['Data']['Exchanges'];
+
+
         $coinAdditionalInfo = $this->makeAPICall(self::CRYPTOCOMPARE_URL . "/api/data/coinsnapshotfullbyid/?id=$id");
+        $additionalInfo = $coinAdditionalInfo['Data']['General'];
+        $websiteLink = explode('/', $additionalInfo['Website']);
+        $additionalInfo['website'] = $websiteLink[2];
+
+        $coinHistory = $this->getCoinHistory($symbol, current($exchanges)['MARKET']);
 
         if ($coinExchangesInfo['Response'] == 'Error') {
             throw $this->createNotFoundException('Found error: ' . $coinExchangesInfo['error']);
         }
 
-        $exchanges = $coinExchangesInfo['Data']['Exchanges'];
-        $additionalInfo = $coinAdditionalInfo['Data']['General'];
-
-        $websiteLink = explode('/', $additionalInfo['Website']);
-        $additionalInfo['website'] = $websiteLink[2];
-
         return response()
             ->json([
                'exchanges' => $exchanges,
-                'additional_info' => $additionalInfo
+                'additional_info' => $additionalInfo,
+                'history' => $coinHistory
             ]);
+    }
+
+    public function getCoinHistory($symbol, $exchange)
+    {
+        $coinHistoryInfo = $this->makeAPICall(self::MIN_API_CRYPTOCOMPARE . "/data/histoday?fsym=" . strtoupper($symbol) . "&tsym=USD&limit=60&aggregate=3&e=" . $exchange);
+        $coinHistory = $coinHistoryInfo['Data'];
+
+        foreach ($coinHistory as &$data) {
+            $data['time'] = isset($data['time']) ? date('F j, Y', $data['time']) : 'N/A';
+        }
+
+        return $coinHistory;
     }
 
     public function makeAPICall($url = '')

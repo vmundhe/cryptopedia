@@ -2,11 +2,8 @@
     <div class="container">
         <div class="tabs is-boxed">
             <ul class="coin-detail-tabs">
-                <li>
-                    <a @click="setActiveTabName('info')">Info</a>
-                </li>
-                <li>
-                    <a @click="setActiveTabName('markets')">Market</a>
+                <li v-for="tab in tabs">
+                    <a @click="setActiveTabName(tab.name)">{{tab.displayName}}</a>
                 </li>
             </ul>
         </div>
@@ -17,6 +14,9 @@
         <div v-if="displayContents('markets')">
             <view-market :exchanges = "exchanges"></view-market>
         </div>
+        <div v-if="displayContents('history')">
+            <view-history :history = "history"></view-history>
+        </div>
     </div>
 </template>
 
@@ -25,18 +25,35 @@
 
     import ViewInfo from './ViewInfo.vue'
     import ViewMarket from './ViewMarket.vue'
+    import ViewHistory from './ViewHistory.vue'
 
     export default {
         components: {
             ViewInfo,
-            ViewMarket
+            ViewMarket,
+            ViewHistory
         },
 
         data() {
             return {
+                tabs: [
+                    {
+                        name: 'info',
+                        displayName: 'Info'
+                    },
+                    {
+                        name: 'markets',
+                        displayName: 'Market'
+                    },
+                    {
+                        name: 'history',
+                        displayName: 'Historical Data'
+                    }
+                ],
                 activeTabName: null,
                 coinInfo: '',
-                exchanges: []
+                exchanges: [],
+                history: []
             };
         },
 
@@ -45,6 +62,7 @@
                 .then(response => {
                 this.coinInfo = response.data.additional_info
                 this.exchanges = response.data.exchanges
+                this.history = response.data.history
             })
         },
 

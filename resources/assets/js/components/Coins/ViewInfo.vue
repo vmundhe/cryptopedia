@@ -62,8 +62,6 @@
 </template>
 
 <script type="text/javascript">
-    import axios from 'axios'
-
     export default {
         props: ['coinInfo'],
 
@@ -73,16 +71,13 @@
                 cardData: null,
                 tabs: [
                     {
-                        name: 'Description',
-                        active: true
+                        name: 'Description'
                     },
                     {
-                        name: 'Features',
-                        active: false
+                        name: 'Features'
                     },
                     {
-                        name: 'Technology',
-                        active: false
+                        name: 'Technology'
                     }
                 ]
             }
