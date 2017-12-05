@@ -1,9 +1,9 @@
 {
+    "/index.js": "/index.js",
+    "/info.js": "/info.js",
     "/view-market.js": "/view-market.js",
     "/view-info.js": "/view-info.js",
     "/view-history.js": "/view-history.js",
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/index.js": "/index.js",
-    "/info.js": "/info.js"
+    "/css/app.css": "/css/app.css"
 }

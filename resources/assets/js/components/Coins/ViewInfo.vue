@@ -13,9 +13,7 @@
                                 </div>
                             </nav>
 
-                            <div class="card-content">
-                                {{getCardData}}
-                            </div>
+                            <div class="card-content" v-html="this.coinInfo[this.activeTabName]"></div>
 
                         </div>
                     </article>
@@ -79,12 +77,6 @@
                         name: 'Technology'
                     }
                 ]
-            }
-        },
-
-        computed: {
-            getCardData: function () {
-                return $(".card-content").html(this.coinInfo[this.activeTabName]);
             }
         }
     }
