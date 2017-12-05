@@ -44616,7 +44616,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "table is-striped is-fullwidth" }, [
+    _c("div", { staticClass: "table is-striped market-history-table" }, [
       _c("thead", [
         _c(
           "tr",
@@ -44786,7 +44786,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "table is-striped is-fullwidth" }, [
+    _c("div", { staticClass: "table is-striped market-history-table" }, [
       _c("thead", [
         _c(
           "tr",
@@ -44863,7 +44863,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            labels: ['Data', 'Open', 'High', 'Low', 'Close']
+            labels: ['Date', 'Open', 'High', 'Low', 'Close']
         };
     }
 });

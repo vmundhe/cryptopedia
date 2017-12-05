@@ -11451,6 +11451,14 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+body,
+html {
+  background-color: #1a1527;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .coin-list {
   cursor: pointer;
 }
@@ -11514,5 +11522,11 @@ img {
 .coin-detail-tabs a {
   color: currentColor !important;
   background-color: gainsboro !important;
+}
+
+.market-history-table {
+  position: absolute;
+  background-color: white !important;
+  color: #363636 !important;
 }
 

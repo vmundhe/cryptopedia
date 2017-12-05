@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="table is-striped is-fullwidth">
+        <div class="table is-striped market-history-table">
             <thead>
             <tr>
                 <td v-for="label in labels">

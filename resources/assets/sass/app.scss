@@ -16,6 +16,13 @@ $table-cell-padding: 0.5em 3.3em;
 
 @import "~bulma/bulma";
 
+body, html {
+  background-color: #1a1527;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .coin-list {
   cursor: pointer;
 }
@@ -74,4 +81,10 @@ img {
     color: currentColor !important;
     background-color: gainsboro !important;
   }
+}
+
+.market-history-table {
+  position: absolute;
+  background-color: white !important;
+  color: #363636 !important;
 }
