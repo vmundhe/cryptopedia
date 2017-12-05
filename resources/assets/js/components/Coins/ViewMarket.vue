@@ -33,7 +33,7 @@
     import axios from 'axios'
 
     export default {
-        props: ["exchanges"],
+        props: ['exchanges'],
 
         data() {
             return {

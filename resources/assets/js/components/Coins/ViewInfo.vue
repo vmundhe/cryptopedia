@@ -65,7 +65,7 @@
     import axios from 'axios'
 
     export default {
-        props: ["coinInfo"],
+        props: ['coinInfo'],
 
         data() {
             return {
@@ -95,9 +95,9 @@
         methods: {
             setCardContent(name) {
                 this.activeTabName = name;
-                this.cardData = $(".card-content").html(this.coinInfo[this.activeTabName]);
             },
             displayContents(name) {
+                this.cardData = $(".card-content").html(this.coinInfo[this.activeTabName]);
                 return this.activeTabName === name;
             }
         }
