@@ -4,15 +4,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import CoinIndex from '../components/Coins/Index.vue'
-import CoinInfo from '../components/Coins/CoinDetail.vue'
+const CoinIndex = () => import(/* webpackChunkName: "index" */ '../components/Coins/Index.vue');
+const CoinInfo = () => import(/* webpackChunkName: "info" */ '../components/Coins/CoinDetail.vue');
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
     routes: [
-        {path: '/', component: CoinIndex},
-        {path: '/:symbol/:id', component: CoinInfo}
+        {path: '/', name: 'index', component: CoinIndex},
+        {path: '/:symbol/:id', name: 'info', component: CoinInfo}
     ]
 })
 

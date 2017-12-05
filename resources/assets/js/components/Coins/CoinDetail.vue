@@ -23,9 +23,10 @@
 <script type="text/javascript">
     import axios from 'axios'
 
-    import ViewInfo from './ViewInfo.vue'
-    import ViewMarket from './ViewMarket.vue'
-    import ViewHistory from './ViewHistory.vue'
+    const ViewInfo = () => import(/* webpackChunkName: "view-info" */ './ViewInfo.vue');
+    const ViewMarket = () => import(/* webpackChunkName: "view-market" */ './ViewMarket.vue');
+    const ViewHistory = () => import(/* webpackChunkName: "view-history" */ './ViewHistory.vue');
+
 
     export default {
         components: {
