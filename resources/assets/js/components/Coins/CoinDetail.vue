@@ -3,7 +3,7 @@
         <div class="tabs is-boxed">
             <ul class="coin-detail-tabs">
                 <li v-for="tab in tabs">
-                    <a @click="setActiveTabName(tab.name)">{{tab.displayName}}</a>
+                    <a @click="activeTabName = tab.name">{{tab.displayName}}</a>
                 </li>
             </ul>
         </div>
@@ -50,7 +50,7 @@
                         displayName: 'Historical Data'
                     }
                 ],
-                activeTabName: null,
+                activeTabName: 'info',
                 coinInfo: '',
                 exchanges: [],
                 history: []
@@ -66,15 +66,7 @@
             })
         },
 
-        mounted() {
-            this.activeTabName = 'info';
-        },
-
         methods: {
-            setActiveTabName(name) {
-                this.activeTabName = name;
-
-            },
             displayContents(name) {
                 return this.activeTabName === name;
             }

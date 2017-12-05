@@ -8,13 +8,13 @@
                             <nav class="navbar coin-info-navbar" role="navigation" aria-label="main navigation">
                                 <div class="navbar-menu is-active">
                                     <div class="navbar-start">
-                                        <a v-for="tab in tabs" class="navbar-item" href="#" @click="setCardContent(tab.name)">{{tab.name}}</a>
+                                        <a v-for="tab in tabs" class="navbar-item" href="#" @click="activeTabName = tab.name">{{tab.name}}</a>
                                     </div>
                                 </div>
                             </nav>
 
-                            <div class="card-content" v-for="tab in tabs"  v-if="displayContents(tab.name)">
-                                {{cardData}}
+                            <div class="card-content">
+                                {{getCardData}}
                             </div>
 
                         </div>
@@ -67,8 +67,7 @@
 
         data() {
             return {
-                activeTabName: null,
-                cardData: null,
+                activeTabName: 'Description',
                 tabs: [
                     {
                         name: 'Description'
@@ -83,17 +82,9 @@
             }
         },
 
-        mounted() {
-            this.setCardContent('Description');
-        },
-
-        methods: {
-            setCardContent(name) {
-                this.activeTabName = name;
-            },
-            displayContents(name) {
-                this.cardData = $(".card-content").html(this.coinInfo[this.activeTabName]);
-                return this.activeTabName === name;
+        computed: {
+            getCardData: function () {
+                return $(".card-content").html(this.coinInfo[this.activeTabName]);
             }
         }
     }
